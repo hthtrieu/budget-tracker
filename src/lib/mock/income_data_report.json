@@ -1,0 +1,10 @@
+[
+  {
+    "actualAmount": 6698127,
+    "category": { "$oid": "67419058fc13ae2910eecf9f", "name": "drinks" }
+  },
+  {
+    "actualAmount": 432819,
+    "category": { "$oid": "67419058fc13ae2910eecfa0", "name": "toys" }
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf21" },
+    "actualAmount": 7248220,
+    "estimatedAmount": 7145905,
+    "transactionDate": "16/07/2024",
+    "transactionType": true,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf22", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf23" },
+    "actualAmount": 7810610,
+    "estimatedAmount": 8611633,
+    "transactionDate": "11/11/2024",
+    "transactionType": true,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf24", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf25" },
+    "actualAmount": 7439531,
+    "estimatedAmount": 2026797,
+    "transactionDate": "23/02/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf26", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf27", "name": "Tien an" },
+    "actualAmount": 4320258,
+    "estimatedAmount": 6414061,
+    "transactionDate": "02/09/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf28", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf29" },
+    "actualAmount": 3509695,
+    "estimatedAmount": 3700295,
+    "transactionDate": "23/06/2024",
+    "transactionType": true,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf2a", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf2b" },
+    "actualAmount": 9163648,
+    "estimatedAmount": 3707374,
+    "transactionDate": "24/05/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf2c", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf2d" },
+    "actualAmount": 7906558,
+    "estimatedAmount": 3011638,
+    "transactionDate": "10/04/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf2e", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf2f" },
+    "actualAmount": 3142629,
+    "estimatedAmount": 7362409,
+    "transactionDate": "18/04/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf30", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf31" },
+    "actualAmount": 7374819,
+    "estimatedAmount": 4917954,
+    "transactionDate": "15/10/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf32", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf33" },
+    "actualAmount": 103187,
+    "estimatedAmount": 9028118,
+    "transactionDate": "04/12/2023",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf34", "name": "Tien an" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf35" },
+    "actualAmount": 9768962,
+    "estimatedAmount": 1784896,
+    "transactionDate": "16/08/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf36" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf37" },
+    "actualAmount": 2466092,
+    "estimatedAmount": 6613012,
+    "transactionDate": "12/01/2024",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf38" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf39" },
+    "actualAmount": 7813629,
+    "estimatedAmount": 1698875,
+    "transactionDate": "26/01/2024",
+    "transactionType": true,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf3a" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf3b" },
+    "actualAmount": 8311170,
+    "estimatedAmount": 5157553,
+    "transactionDate": "18/09/2024",
+    "transactionType": true,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf3c" }
+  },
+  {
+    "id": { "$oid": "6740a3c6fc13ae1e54eecf3d" },
+    "actualAmount": 5860459,
+    "estimatedAmount": 8320891,
+    "transactionDate": "27/11/2023",
+    "transactionType": false,
+    "category": { "$oid": "6740a3c6fc13ae1e54eecf3e" }
+  }
+]
