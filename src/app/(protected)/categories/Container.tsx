@@ -44,6 +44,7 @@ const Container = () => {
     if (session?.user?.id) {
       getUserCategoriesList();
     }
+    //eslint-disable-next-line
   }, [session]);
 
   const submitCategoryForm = async (data: any) => {

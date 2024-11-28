@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import OverviewBlock from "@/components/home/overview/OverviewBlock";
+// import OverviewBlock from "@/components/home/overview/OverviewBlock";
 import TransactionsList from "@/components/home/transaction-data/TransactionsList";
 import { useSession } from "next-auth/react";
 import { startOfDay, subDays, isSameDay, isThisWeek } from "date-fns";
@@ -30,6 +30,7 @@ const HomeContainer = () => {
         groupTransactionsByDate(result.data);
       } else {
         const error = await response.json();
+        console.log("error: ", error);
       }
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -43,7 +44,12 @@ const HomeContainer = () => {
     const today = startOfDay(new Date());
     const yesterday = subDays(today, 1);
 
-    const grouped = {
+    const grouped: {
+      today: any[];
+      yesterday: any[];
+      thisWeek: any[];
+      older: any[];
+    } = {
       today: [],
       yesterday: [],
       thisWeek: [],
@@ -72,10 +78,11 @@ const HomeContainer = () => {
     if (session?.user?.id) {
       getUserTransactions();
     }
+    //eslint-disable-next-line
   }, [session]);
   return (
     <div className="flex flex-col gap-4">
-      <OverviewBlock />
+      {/* <OverviewBlock /> */}
       <TransactionsList
         groupedTransactions={groupedTransactions}
         isLoading={isLoading}

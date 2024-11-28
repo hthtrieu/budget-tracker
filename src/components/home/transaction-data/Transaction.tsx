@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Card, CardDescription } from "@/components/ui/card";
-import { CircleDollarSign, Plus } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
 import { formatNumberToVND } from "@/lib/utils";
 import { TransactionDocument } from "@/models/Transaction";
 

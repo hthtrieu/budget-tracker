@@ -24,8 +24,11 @@ const Container = () => {
     transactions.forEach((transaction: TransactionDocument) => {
       const { actualAmount, category, estimatedAmount } = transaction;
 
-      if (!groupedData[category._id]) {
-        groupedData[category._id] = {
+      // Chuyển _id thành chuỗi
+      const categoryId = category._id.toString();
+
+      if (!groupedData[categoryId]) {
+        groupedData[categoryId] = {
           actualAmount: Number(transaction.actualAmount),
           estimatedAmount: Number(transaction.estimatedAmount),
           category: {
@@ -33,15 +36,14 @@ const Container = () => {
           },
         };
       } else {
-        groupedData[transaction.category._id].actualAmount +=
-          Number(actualAmount);
-        groupedData[transaction.category._id].estimatedAmount +=
-          Number(estimatedAmount);
+        groupedData[categoryId].actualAmount += Number(actualAmount);
+        groupedData[categoryId].estimatedAmount += Number(estimatedAmount);
       }
     });
 
     return Object.values(groupedData); // Chuyển đổi từ object thành array
   }
+
   const getReportData = async ({
     month,
     year,
@@ -87,7 +89,9 @@ const Container = () => {
     setYear(selectedYear);
   };
 
-  const onSelectTransactionType = (selectedType: "Thu" | "Chi" | string) => {
+  const onSelectTransactionType = (
+    selectedType: "Thu" | "Chi" | string | any
+  ) => {
     setTransactionType(selectedType);
   };
 

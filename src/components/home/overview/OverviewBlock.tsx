@@ -13,36 +13,71 @@ import { PlusCircleIcon } from "lucide-react";
 import CommonPopup from "@/components/common/popup/CommonPopup";
 import TransactionForm from "@/components/transaction/TransactionForm";
 import { BarChartComponent } from "@/components/chart/bar-chart/BarChart";
-import mockData from "@/lib/mock/overview_income_espense.json";
+// import mockData from "@/lib/mock/overview_income_espense.json";
 import { CategoryDocument } from "@/models/Category";
+import { TransactionDocument } from "@/models/Transaction";
 
 const OverviewBlock = ({
   onCreateTransaction,
   categoriesList,
+  transactionsList,
 }: {
   onCreateTransaction: any;
   categoriesList: CategoryDocument[];
+  transactionsList: TransactionDocument[];
 }) => {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [currentTransactionType, setCurrentTransactionType] = useState<
     "Thu" | "Chi"
   >("Thu");
+  function transformTransactions(transactions: TransactionDocument[]) {
+    const groupedData: Record<
+      string,
+      {
+        actualAmount: number;
+        estimatedAmount: number;
+        transactionType: string;
+      }
+    > = {};
 
+    transactions.forEach((transaction: TransactionDocument) => {
+      const { actualAmount, estimatedAmount, transactionType } = transaction;
+
+      if (!groupedData[transactionType]) {
+        groupedData[transactionType] = {
+          actualAmount: Number(transaction.actualAmount),
+          estimatedAmount: Number(transaction.estimatedAmount),
+
+          transactionType: transactionType,
+        };
+      } else {
+        groupedData[transactionType].actualAmount += Number(actualAmount);
+        groupedData[transactionType].estimatedAmount += Number(estimatedAmount);
+        groupedData[transactionType].transactionType = transactionType;
+      }
+    });
+    return Object.values(groupedData); // Chuyển đổi từ object thành array
+  }
+  const transformData = transformTransactions(transactionsList);
+  const IncomeData = transformData.find(
+    (data) => data.transactionType === "Thu"
+  );
+  const ExpenseData = transformData.find(
+    (data) => data.transactionType === "Chi"
+  );
   return (
     <div className="py-2">
       <Card className="border-none">
         <CardContent className="p-2">
           <div className="w-full md:w-1/2 mx-auto">
             <BarChartComponent
-              title="Thong ke chenh lech giua thuc te va du kien"
-              data={mockData.map((data: any) => ({
-                value: Math.abs(
-                  data?.totalEstimatedAmount - data?.totalActualAmount
-                ),
-                type: data?.type ? "Thu" : "Chi",
+              title="Thong ke Thu va Chi Thang"
+              data={transformData.map((data: any) => ({
+                value: Number(data?.actualAmount),
+                transactionType: String(data?.transactionType),
               }))}
               dataKey="value"
-              nameKey="type"
+              nameKey="transactionType"
               colors={["#28a745", "#155724"]}
               scaleMode="oklch"
               barRadius={5}
@@ -55,7 +90,7 @@ const OverviewBlock = ({
           <div className="w-1/2 flex flex-col justify-between">
             <CardDescription>{"Thu"}</CardDescription>
             <CardTitle className="text-xl">
-              {formatNumberToVND(1000000)}
+              {formatNumberToVND(IncomeData?.actualAmount)}
             </CardTitle>
             <Button
               size={"sm"}
@@ -73,7 +108,7 @@ const OverviewBlock = ({
           <div className="w-1/2 flex flex-col justify-between">
             <CardDescription>{"Chi"}</CardDescription>
             <CardTitle className="text-xl">
-              {formatNumberToVND(1000000)}
+              {formatNumberToVND(ExpenseData?.actualAmount)}
             </CardTitle>
             <Button
               size={"sm"}

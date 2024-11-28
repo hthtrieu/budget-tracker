@@ -10,6 +10,7 @@ import { CategoryDocument } from "@/models/Category";
 const HomeContainer = () => {
   const { data: session } = useSession();
   const [categoriesList, setCategoriesList] = useState<CategoryDocument[]>([]);
+  const [transactions, setTransactions] = useState<TransactionDocument[]>([]);
 
   // overview hook
   const onCreateNewTransaction = async (data: any) => {
@@ -77,19 +78,28 @@ const HomeContainer = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const getUserTransactions = async () => {
     setIsLoading(true);
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
     try {
-      const response = await fetch("/api/user/transaction", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `/api/user/transaction?year=${year}&month=${month}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
         groupTransactionsByDate(result.data);
+        setTransactions(result.data);
       } else {
+        //eslint disable next-line
         const error = await response.json();
+        console.log("error: ", error);
       }
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -103,7 +113,12 @@ const HomeContainer = () => {
     const today = startOfDay(new Date());
     const yesterday = subDays(today, 1);
 
-    const grouped = {
+    const grouped: {
+      today: any[];
+      yesterday: any[];
+      thisWeek: any[];
+      older: any[];
+    } = {
       today: [],
       yesterday: [],
       thisWeek: [],
@@ -132,12 +147,14 @@ const HomeContainer = () => {
       getUserTransactions();
       getUserCategoriesList();
     }
+    //eslint-disable-next-line
   }, [session]);
   return (
     <div className="flex flex-col gap-4">
       <OverviewBlock
         categoriesList={categoriesList}
         onCreateTransaction={onCreateNewTransaction}
+        transactionsList={transactions}
       />
       <TransactionsList
         groupedTransactions={groupedTransactions}

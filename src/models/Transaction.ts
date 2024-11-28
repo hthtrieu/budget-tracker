@@ -1,13 +1,19 @@
 import mongoose, { Schema, model, Document } from "mongoose";
+import { Types } from "mongoose";
 
+interface CategoryPopulated {
+  _id: Types.ObjectId | string;
+  name: string;
+}
+import { CategoryDocument } from "./Category";
 export interface TransactionDocument extends Document {
   _id: string;
-  user: mongoose.Types.ObjectId;
-  category: mongoose.Types.ObjectId;
-  transactionDate: Date; // Sử dụng kiểu Date
+  user: Types.ObjectId;
+  category: CategoryDocument | CategoryPopulated; // Cho phép kiểu dữ liệu sau populate
+  transactionDate: Date;
   actualAmount: string;
   estimatedAmount: string;
-  transactionType: "Thu" | "Chi"; // Enum type
+  transactionType: "Thu" | "Chi";
 }
 
 const TransactionSchema = new Schema<TransactionDocument>(

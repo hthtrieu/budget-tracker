@@ -10,6 +10,7 @@ import TransactionForm from "@/components/transaction/TransactionForm";
 import { useSession } from "next-auth/react";
 import { CategoryDocument } from "@/models/Category";
 import { Button } from "@/components/ui/button";
+import { ActionsCell } from "./ActionCell";
 export default function Container() {
   // const [data, setData] = useState<TransactionDocument[]>([]);
   const { data: session } = useSession();
@@ -48,7 +49,7 @@ export default function Container() {
         setIsOpenPopup(false);
       } else {
         const error = await response.json();
-        alert(error);
+        console.log("error: ", error);
       }
     } catch (error) {
       console.error("Error submitting category:", error);
@@ -97,6 +98,7 @@ export default function Container() {
         setTransactionsList(result.data);
       } else {
         const error = await response.json();
+        console.log("error: ", error);
       }
     } catch (error) {
       console.error("Error fetching transactions:", error);
@@ -109,6 +111,7 @@ export default function Container() {
       getUserTransactions();
       getUserCategoriesList();
     }
+    //eslint-disable-next-line
   }, [session]);
 
   // Hàm xóa transaction
@@ -171,22 +174,38 @@ export default function Container() {
     }
   };
   // Truyền hàm vào columns
-  const columns = defaultColumns.map((column) => {
-    if (column.id === "actions") {
-      return {
-        ...column,
-        cell: ({ row }: { row: { original: TransactionDocument } }) => (
-          <column.cell
-            row={row}
-            deleteTransaction={deleteTransaction}
-            categoriesList={categoriesList}
-            onEditTransaction={onEditTransaction}
-          />
-        ),
-      };
-    }
-    return column;
-  });
+  // const columns = defaultColumns.map((column) => {
+  //   if (column.id === "actions") {
+  //     return {
+  //       ...column,
+  //       cell: ({ row }: { row: { original: TransactionDocument } }) => (
+  //         // eslint-disable-next-line
+  //         <column.cell
+  //           row={row}
+  //           deleteTransaction={deleteTransaction}
+  //           categoriesList={categoriesList}
+  //           onEditTransaction={onEditTransaction}
+  //         />
+  //       ),
+  //     };
+  //   }
+  //   return column;
+  // });
+
+  const columns = [
+    ...defaultColumns,
+    {
+      id: "actions",
+      cell: ({ row }: { row: { original: TransactionDocument } }) => (
+        <ActionsCell
+          row={row.original}
+          deleteTransaction={deleteTransaction}
+          categoriesList={categoriesList}
+          onEditTransaction={onEditTransaction}
+        />
+      ),
+    },
+  ];
 
   if (isLoading) {
     return (
