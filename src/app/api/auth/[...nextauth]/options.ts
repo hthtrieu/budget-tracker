@@ -38,18 +38,20 @@ export const authOptions: NextAuthOptions = {
           const userExists = await User.findOne({ email });
 
           if (!userExists) {
-            const response = await fetch("http://localhost:3000/api/user", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ name, email }),
-            });
+            // const response = await fetch("http://localhost:3000/api/user", {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify({ name, email }),
+            // });
+            await connectDB();
+            await User.create({ name, email });
 
-            if (!response.ok) {
-              console.error(`Failed to create user: ${response.statusText}`);
-              return false;
-            }
+            // if (!response.ok) {
+            //   console.error(`Failed to create user: ${response.statusText}`);
+            //   return false;
+            // }
           }
           return true;
         } catch (error) {

@@ -84,7 +84,7 @@ const UserPopover = () => {
 
           <Button
             onClick={() => {
-              signOut({ callbackUrl: "http://localhost:3000" });
+              signOut({ callbackUrl: "/" });
             }}
           >
             Sign out
