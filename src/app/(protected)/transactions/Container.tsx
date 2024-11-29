@@ -216,10 +216,6 @@ export default function Container() {
     );
   }
 
-  if (!transactionsList || transactionsList.length === 0) {
-    return <Card className="container mx-auto py-10">No data</Card>;
-  }
-
   return (
     <Card className="container mx-auto py-10">
       <div className="flex justify-end mx-2">
@@ -259,7 +255,15 @@ export default function Container() {
           />
         </CommonPopup>
       </div>
-      <DataTable columns={columns} data={transactionsList} />
+      {!transactionsList || transactionsList.length === 0 ? (
+        <>
+          <div className="container mx-auto p-10">No data</div>
+        </>
+      ) : (
+        <>
+          <DataTable columns={columns} data={transactionsList} />
+        </>
+      )}
     </Card>
   );
 }
