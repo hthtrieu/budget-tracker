@@ -17,11 +17,6 @@ declare module "next-auth" {
 }
 
 export const authOptions: NextAuthOptions = {
-  pages: {
-    signIn: "/auth/signin",
-    newUser: "/start", // Đảm bảo trang `/start` tồn tại
-  },
-
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",

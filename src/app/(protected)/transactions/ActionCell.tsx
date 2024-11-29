@@ -52,7 +52,7 @@ export const ActionsCell = ({
         open={isOpenEditPopup}
         setOpen={setIsOpenEditPopup}
         isShowTrigger={false}
-        title="Xác nhận xóa"
+        title="Chỉnh sửa"
       >
         <TransactionForm
           defaultValues={{

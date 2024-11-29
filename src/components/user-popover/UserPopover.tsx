@@ -59,7 +59,7 @@ const UserPopover = () => {
           >
             <Link href={"/reports"} className="h-full w-full flex gap-4">
               <ChartNoAxesCombinedIcon />
-              {"Bao cao thu chi"}
+              {"Báo cáo thu chi"}
             </Link>
           </Button>
           <Button
@@ -69,7 +69,7 @@ const UserPopover = () => {
           >
             <Link href={"/transactions"} className="h-full w-full flex gap-4">
               <HandCoinsIcon />
-              {"Du lieu"}
+              {"Dữ liệu"}
             </Link>
           </Button>
           <Button
@@ -79,7 +79,7 @@ const UserPopover = () => {
           >
             <Link href={"/categories"} className="h-full w-full flex gap-4">
               <ClipboardPenIcon />
-              {"Them muc"}
+              {"Thêm mục"}
             </Link>
           </Button>
           <Button
@@ -89,7 +89,7 @@ const UserPopover = () => {
           >
             <Link href={"/start"} className="h-full w-full flex gap-4">
               <UploadCloudIcon />
-              {"Nhap du lieu"}
+              {"Nhập dữ liệu"}
             </Link>
           </Button>
           <Button
@@ -97,7 +97,7 @@ const UserPopover = () => {
               signOut({ callbackUrl: "/" });
             }}
           >
-            Sign out
+            Đăng xuất
           </Button>
         </div>
       </PopoverContent>

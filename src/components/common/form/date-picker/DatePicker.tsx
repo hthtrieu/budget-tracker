@@ -2,6 +2,7 @@
 
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { vi } from "date-fns/locale";
 
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -21,8 +22,8 @@ export function DatePicker(props: DatePickerProps) {
           <Input
             value={
               props.field.value
-                ? format(props.field.value, "PPP")
-                : "Pick a date"
+                ? format(props.field.value, "PPP", { locale: vi })
+                : "Chọn ngày"
             }
             icon={<CalendarIcon />}
             readOnly={true}
@@ -36,9 +37,9 @@ export function DatePicker(props: DatePickerProps) {
           mode="single"
           selected={props.field.value}
           onSelect={props.field.onChange}
-          disabled={(date) =>
-            date > new Date() || date < new Date("1900-01-01")
-          }
+          // disabled={(date) =>
+          //   date > new Date() || date < new Date("1900-01-01")
+          // }
           initialFocus
         />
       </PopoverContent>

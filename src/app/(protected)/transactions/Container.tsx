@@ -233,7 +233,7 @@ export default function Container() {
               className="my-2 "
               variant={"default"}
             >
-              {"Them du lieu"}
+              {"Thêm dữ liệu"}
             </Button>
           }
         >

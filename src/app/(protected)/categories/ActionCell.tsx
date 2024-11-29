@@ -45,7 +45,7 @@ export const ActionsCell = ({ row, onDelete, onEdit }: ActionsCellProps) => {
         open={isOpenEditPopup}
         setOpen={setIsOpenEditPopup}
         isShowTrigger={false}
-        title="Xác nhận xóa"
+        title="Chỉnh sửa"
       >
         <CategoryForm
           onSubmitForm={(data: any) => {
