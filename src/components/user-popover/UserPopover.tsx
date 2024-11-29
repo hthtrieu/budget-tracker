@@ -14,6 +14,7 @@ import {
   ChartNoAxesCombinedIcon,
   ClipboardPenIcon,
   HandCoinsIcon,
+  UploadCloudIcon,
 } from "lucide-react";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "../ui/button";
@@ -22,7 +23,7 @@ const UserPopover = () => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const color = getRandomColor(session?.user?.name as string);
   if (!session) {
-    return <Button onClick={() => signIn("google")}>Sign in</Button>;
+    return <Button onClick={() => signIn("google")}>Đăng nhập</Button>;
   }
   return (
     <Popover open={isOpenPopup} onOpenChange={setIsOpenPopup}>
@@ -81,7 +82,16 @@ const UserPopover = () => {
               {"Them muc"}
             </Link>
           </Button>
-
+          <Button
+            variant={"link"}
+            className="p-0 w-full h-full"
+            onClick={() => setIsOpenPopup(false)}
+          >
+            <Link href={"/start"} className="h-full w-full flex gap-4">
+              <UploadCloudIcon />
+              {"Nhap du lieu"}
+            </Link>
+          </Button>
           <Button
             onClick={() => {
               signOut({ callbackUrl: "/" });

@@ -8,7 +8,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-const CategoryForm = ({ onSubmitForm }: { onSubmitForm: any }) => {
+const CategoryForm = ({
+  onSubmitForm,
+  defaultValues,
+}: {
+  onSubmitForm: any;
+  defaultValues?: {
+    name: string;
+  };
+}) => {
   // Define schema using Zod
   const formSchema = z.object({
     name: z.string().min(2, { message: "Required" }),
@@ -20,9 +28,9 @@ const CategoryForm = ({ onSubmitForm }: { onSubmitForm: any }) => {
   // Initialize React Hook Form
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-    // defaultValues: {
-    //   username: "username",
-    // },
+    defaultValues: {
+      name: defaultValues?.name,
+    },
   });
 
   // Submit handler

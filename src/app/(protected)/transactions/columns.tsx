@@ -26,8 +26,8 @@ export const columns: ColumnDef<TransactionDocument>[] = [
     accessorKey: "category",
     header: "Tên danh mục",
     cell: ({ row }) => {
-      const category = row.original.category;
-      return <div className="w-20">{category.name}</div>;
+      const category = row.original?.category;
+      return <div className="w-20">{category?.name}</div>;
     },
   },
   {

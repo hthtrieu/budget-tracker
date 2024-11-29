@@ -21,7 +21,7 @@ const Header = () => {
       <MaxWidthWrapper>
         <nav className="w-full">
           <div className="mx-auto flex md:max-w-screen-xl items-center justify-between py-2">
-            <Link href={"/"}>
+            <Link href={"/home"}>
               <Logo />
             </Link>
             {/* <div className="w-1/2"></div> */}

@@ -11,8 +11,8 @@ const layout = ({
     <div className="bg-gradient-to-br from-pink-50 via-pink-100 to-pink-300">
       <div className="flex flex-col">
         <Header />
-        <main className="min-h-screen">
-          <MaxWidthWrapper className="">{children}</MaxWidthWrapper>
+        <main className="min-h-screen h-full">
+          <MaxWidthWrapper className="h-full">{children}</MaxWidthWrapper>
         </main>
         <Footer />
       </div>

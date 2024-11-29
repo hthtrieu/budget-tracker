@@ -25,7 +25,7 @@ const Container = () => {
       const { actualAmount, category, estimatedAmount } = transaction;
 
       // Chuyển _id thành chuỗi
-      const categoryId = category._id.toString();
+      const categoryId = category?._id.toString();
 
       if (!groupedData[categoryId]) {
         groupedData[categoryId] = {

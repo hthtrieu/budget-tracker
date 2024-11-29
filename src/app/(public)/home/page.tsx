@@ -1,7 +1,11 @@
 import React from "react";
-
+import HomeContainer from "./Container";
 const page = () => {
-  return <div>Landing page if user not login</div>;
+  return (
+    <div>
+      <HomeContainer />
+    </div>
+  );
 };
 
 export default page;

@@ -25,7 +25,7 @@ import { cn, isFunction } from "@/lib/utils";
 import { DatePicker } from "./date-picker/DatePicker";
 
 // import { AvatarInput } from "./avatar/AvatarInput";
-// import { FileDropzone } from "./file-dropzone/FileDropzone";
+import { FileDropzone } from "./file-upload/FileDropzone";
 // import { FileDropzonePresigned } from "./file-dropzone/FileDropzonePresigned";
 
 export const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
@@ -244,21 +244,21 @@ const renderInput = ({
           ref={ref}
         />
       );
-    // case Constants.INPUT_TYPE.FILE_UPLOAD:
-    //   return (
-    //     <FileDropzone
-    //       {...field}
-    //       type={type}
-    //       placeholder={placeholder}
-    //       className={classNameInput}
-    //       onChange={onChange}
-    //       onKeyUp={onKeyUp}
-    //       maxLength={maxLength}
-    //       disabled={disabled}
-    //       readOnly={readOnly}
-    //       onClickIcon={onClickIcon}
-    //     />
-    //   );
+    case Constants.INPUT_TYPE.FILE_UPLOAD:
+      return (
+        <FileDropzone
+          {...field}
+          type={type}
+          placeholder={placeholder}
+          className={classNameInput}
+          onChange={onChange}
+          onKeyUp={onKeyUp}
+          maxLength={maxLength}
+          disabled={disabled}
+          readOnly={readOnly}
+          onClickIcon={onClickIcon}
+        />
+      );
     // case Constants.INPUT_TYPE.FILE_UPLOAD_PRESIGNED:
     //   return (
     //     <FileDropzonePresigned

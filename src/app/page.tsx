@@ -6,10 +6,11 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 export default async function Page() {
   const session = await getServerSession();
-  if (session) {
+  console.log("session: ", session);
+  if (session && !session.user?.isNewUser) {
     redirect("/overview");
-    //or rendering landing page
-    // return <div>User not authorize</div>;
+  } else if (session?.user?.isNewUser) {
+    redirect("/start");
   }
   return (
     <div className="bg-gradient-to-br from-pink-50 via-pink-100 to-pink-300">

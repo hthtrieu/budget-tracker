@@ -65,13 +65,27 @@ const OverviewBlock = ({
   const ExpenseData = transformData.find(
     (data) => data.transactionType === "Chi"
   );
+  let title: string = "";
+
+  const saveMoney =
+    Number(IncomeData?.actualAmount) - Number(ExpenseData?.actualAmount);
+  if (saveMoney > 0) {
+    title = `Tháng này bạn đã tiết kiệm được ${formatNumberToVND(saveMoney)}`;
+  }
+  if (saveMoney < 0) {
+    title = `Tháng này bạn bị âm ${formatNumberToVND(saveMoney)}`;
+  }
+  if (saveMoney == 0) {
+    title = `Tháng này bạn khum tiết kiệm được đồng nào`;
+  }
+
   return (
     <div className="py-2">
       <Card className="border-none">
         <CardContent className="p-2">
           <div className="w-full md:w-1/2 mx-auto">
             <BarChartComponent
-              title="Thong ke Thu va Chi Thang"
+              title={title || ""}
               data={transformData.map((data: any) => ({
                 value: Number(data?.actualAmount),
                 transactionType: String(data?.transactionType),

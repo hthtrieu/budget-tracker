@@ -60,7 +60,7 @@ export const ActionsCell = ({
             estimatedAmount: transaction.estimatedAmount,
             transactionDate: transaction.transactionDate.toString(),
             transactionType: transaction.transactionType,
-            category: transaction.category._id.toString(),
+            category: transaction.category?._id.toString(),
           }}
           categoryOptions={
             categoriesList
@@ -71,7 +71,7 @@ export const ActionsCell = ({
               : []
           }
           onSubmitTransactionForm={(data: any) => {
-            onEditTransaction({ ...data, id: transaction._id });
+            onEditTransaction({ ...data, id: transaction?._id });
           }}
         />
       </CommonPopup>

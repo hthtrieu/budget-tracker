@@ -74,7 +74,7 @@ export function BarChartComponent<T>(props: BarChartCommonProps<T>) {
     nameKey,
     colors,
     scaleMode,
-    barRadius = 4,
+    barRadius = 0,
     isVertical = false,
     title,
   } = props;
@@ -92,7 +92,7 @@ export function BarChartComponent<T>(props: BarChartCommonProps<T>) {
   return (
     <>
       <div style={{ textAlign: "center", marginBottom: "10px" }}>
-        <h3>{title}</h3>
+        <h3 className="font-semibold text-xl">{title}</h3>
       </div>
       <ChartContainer config={chartConfig}>
         <BarChart

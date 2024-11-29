@@ -11,11 +11,17 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
+      isNewUser?: boolean;
     };
   }
 }
 
 export const authOptions: NextAuthOptions = {
+  pages: {
+    signIn: "/auth/signin",
+    newUser: "/start", // Đảm bảo trang `/start` tồn tại
+  },
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -38,20 +44,8 @@ export const authOptions: NextAuthOptions = {
           const userExists = await User.findOne({ email });
 
           if (!userExists) {
-            // const response = await fetch("http://localhost:3000/api/user", {
-            //   method: "POST",
-            //   headers: {
-            //     "Content-Type": "application/json",
-            //   },
-            //   body: JSON.stringify({ name, email }),
-            // });
             await connectDB();
             await User.create({ name, email });
-
-            // if (!response.ok) {
-            //   console.error(`Failed to create user: ${response.statusText}`);
-            //   return false;
-            // }
           }
           return true;
         } catch (error) {
@@ -62,21 +56,39 @@ export const authOptions: NextAuthOptions = {
       return false;
     },
 
+    // async jwt({ token, user }) {
+    //   if (user) {
+    //     await connectDB();
+    //     const dbUser = await User.findOne({ email: user.email });
+    //     if (dbUser) {
+    //       token.id = dbUser._id.toString(); // Lưu id dưới dạng string
+    //     }
+    //   }
+    //   return token;
+    // },
+
     async jwt({ token, user }) {
       if (user) {
         await connectDB();
         const dbUser = await User.findOne({ email: user.email });
         if (dbUser) {
-          token.id = dbUser._id.toString(); // Lưu id dưới dạng string
+          token.id = dbUser._id.toString();
+          token.isNewUser = dbUser.isNewUser || false; // Thêm flag isNewUser
         }
       }
       return token;
     },
 
     // callback session: Gán id từ token vào session
+    // async session({ session }) {
+    //   const userExists = await User.findOne({ email: session.user.email });
+    //   session.user.id = userExists.id;
+    //   return session;
+    // },
     async session({ session }) {
       const userExists = await User.findOne({ email: session.user.email });
       session.user.id = userExists.id;
+      session.user.isNewUser = userExists ? false : true;
       return session;
     },
   },
