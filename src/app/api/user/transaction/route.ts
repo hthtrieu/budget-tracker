@@ -13,8 +13,8 @@ export async function POST(request: Request) {
       transactionType,
       actualAmount,
       estimatedAmount,
+      note,
     } = await request.json();
-
     if (!userId || !categoryId) {
       return NextResponse.json(
         { message: "Missing userId or categoryId" },
@@ -32,8 +32,8 @@ export async function POST(request: Request) {
       transactionDate: transactionDate,
       actualAmount: actualAmount,
       estimatedAmount: estimatedAmount,
+      note: note,
     });
-
     await User.findByIdAndUpdate(userId, {
       $push: { transaction: transaction._id },
     });

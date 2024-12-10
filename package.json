@@ -32,7 +32,6 @@
     "date-fns": "^4.1.0",
     "lucide-react": "^0.460.0",
     "mongoose": "^8.8.2",
-    "multer": "^1.4.5-lts.1",
     "next": "14.2.16",
     "next-auth": "^4.24.10",
     "react": "^18",
@@ -48,7 +47,6 @@
   },
   "devDependencies": {
     "@types/chroma-js": "^2.4.4",
-    "@types/multer": "^1.4.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

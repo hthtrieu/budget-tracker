@@ -14,6 +14,7 @@ export interface TransactionDocument extends Document {
   actualAmount: string;
   estimatedAmount: string;
   transactionType: "Thu" | "Chi";
+  note?: string;
 }
 
 const TransactionSchema = new Schema<TransactionDocument>(
@@ -44,6 +45,11 @@ const TransactionSchema = new Schema<TransactionDocument>(
       type: String,
       enum: ["Thu", "Chi"], // Chỉ chấp nhận "Thu" hoặc "Chi"
       required: [true, "Loại giao dịch là bắt buộc"],
+    },
+    note: {
+      type: String,
+      default: "",
+      required: false,
     },
   },
   {

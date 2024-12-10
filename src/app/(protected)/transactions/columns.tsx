@@ -79,4 +79,21 @@ export const columns: ColumnDef<TransactionDocument>[] = [
       );
     },
   },
+  {
+    accessorKey: "note",
+    header: "Ghi chú",
+    cell: ({ row }) => {
+      const type = row.getValue("note") as string;
+      return (
+        <span
+          className={cn(
+            "capitalize font-bold",
+            type === "Thu" ? "text-green-500" : "text-red-500"
+          )}
+        >
+          {type}
+        </span>
+      );
+    },
+  },
 ];

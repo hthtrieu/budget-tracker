@@ -32,6 +32,7 @@ const HomeContainer = () => {
           actualAmount: data?.actualAmount,
           estimatedAmount: data?.estimatedAmount,
           transactionDate: data?.transactionDate,
+          note: data?.note,
         }),
       });
 
@@ -117,12 +118,12 @@ const HomeContainer = () => {
       today: any[];
       yesterday: any[];
       thisWeek: any[];
-      older: any[];
+      // older: any[];
     } = {
       today: [],
       yesterday: [],
       thisWeek: [],
-      older: [],
+      // older: [],
     };
 
     transactions.forEach((transaction: TransactionDocument) => {
@@ -134,9 +135,10 @@ const HomeContainer = () => {
         grouped.yesterday.push(transaction);
       } else if (isThisWeek(transactionDate)) {
         grouped.thisWeek.push(transaction);
-      } else {
-        grouped.older.push(transaction);
       }
+      // else {
+      //   grouped.older.push(transaction);
+      // }
     });
 
     setGroupedTransactions(grouped);

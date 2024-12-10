@@ -25,7 +25,6 @@ export default function Container() {
     if (!session?.user?.id) {
       return;
     }
-
     const userId = session.user.id;
     try {
       const response = await fetch("/api/user/transaction", {
@@ -40,6 +39,7 @@ export default function Container() {
           actualAmount: data?.actualAmount,
           estimatedAmount: data?.estimatedAmount,
           transactionDate: data?.transactionDate,
+          note: data?.note,
         }),
       });
 
@@ -159,6 +159,7 @@ export default function Container() {
           actualAmount: data?.actualAmount,
           estimatedAmount: data?.estimatedAmount,
           transactionDate: data?.transactionDate,
+          note: data?.note,
         }),
       });
 
@@ -173,24 +174,6 @@ export default function Container() {
       console.error("Error submitting category:", error);
     }
   };
-  // Truyền hàm vào columns
-  // const columns = defaultColumns.map((column) => {
-  //   if (column.id === "actions") {
-  //     return {
-  //       ...column,
-  //       cell: ({ row }: { row: { original: TransactionDocument } }) => (
-  //         // eslint-disable-next-line
-  //         <column.cell
-  //           row={row}
-  //           deleteTransaction={deleteTransaction}
-  //           categoriesList={categoriesList}
-  //           onEditTransaction={onEditTransaction}
-  //         />
-  //       ),
-  //     };
-  //   }
-  //   return column;
-  // });
 
   const columns = [
     ...defaultColumns,

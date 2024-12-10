@@ -18,6 +18,7 @@ interface TransactionFormProps {
     category?: string;
     actualAmount?: string;
     estimatedAmount?: string;
+    note?: string;
   };
   onSubmitTransactionForm?: (data: any) => void;
   categoryOptions?: { key: string; label: string }[];
@@ -33,6 +34,7 @@ const TransactionForm = (props: TransactionFormProps) => {
     category: z.string({ required_error: "Không được bỏ trống" }),
     actualAmount: z.string({ required_error: "Không được bỏ trống" }),
     estimatedAmount: z.string({ required_error: "Không được bỏ trống" }),
+    note: z.string().optional(),
   });
 
   // Infer form data type from Zod schema
@@ -49,6 +51,7 @@ const TransactionForm = (props: TransactionFormProps) => {
       category: props.defaultValues?.category || "",
       actualAmount: props.defaultValues?.actualAmount || "",
       estimatedAmount: props.defaultValues?.estimatedAmount || "",
+      note: props.defaultValues?.note,
     },
   });
 
@@ -110,6 +113,14 @@ const TransactionForm = (props: TransactionFormProps) => {
             label="Ngày"
             placeholder="Ngày giao dịch"
             required={true}
+          />
+          <FormInput
+            control={form.control}
+            fieldName="note"
+            type={Constants.INPUT_TYPE.TEXTAREA}
+            label="Ghi chú"
+            placeholder="Thêm Ghi chú"
+            required={false}
           />
           <Button type="submit" variant="default" className="w-full">
             Lưu

@@ -61,6 +61,7 @@ export const ActionsCell = ({
             transactionDate: transaction.transactionDate.toString(),
             transactionType: transaction.transactionType,
             category: transaction.category?._id.toString(),
+            note: transaction.note,
           }}
           categoryOptions={
             categoriesList
