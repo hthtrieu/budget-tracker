@@ -1,12 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-// import { MoreHorizontal, PenIcon, Trash2Icon } from "lucide-react";
-// import { Button } from "@/components/ui/button";
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { DataTableColumnHeader } from "@/components/common/table/data-table-column-header";
 import { cn, formatNumberToVND } from "@/lib/utils";
 import { format } from "date-fns";
@@ -83,16 +81,24 @@ export const columns: ColumnDef<TransactionDocument>[] = [
     accessorKey: "note",
     header: "Ghi chú",
     cell: ({ row }) => {
-      const type = row.getValue("note") as string;
+      const note = row.getValue("note") as string;
       return (
-        <span
-          className={cn(
-            "capitalize font-bold",
-            type === "Thu" ? "text-green-500" : "text-red-500"
-          )}
-        >
-          {type}
-        </span>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <span
+                className={cn(
+                  "capitalize block w-28 truncate overflow-hidden whitespace-nowrap"
+                )}
+              >
+                {note}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              <span>{note}</span>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       );
     },
   },

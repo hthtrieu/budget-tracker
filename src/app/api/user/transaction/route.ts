@@ -191,6 +191,7 @@ export async function PUT(request: Request) {
       transactionType,
       actualAmount,
       estimatedAmount,
+      note,
     } = await request.json();
 
     if (!transactionId) {
@@ -262,6 +263,7 @@ export async function PUT(request: Request) {
     transaction.actualAmount = actualAmount ?? transaction.actualAmount;
     transaction.estimatedAmount =
       estimatedAmount ?? transaction.estimatedAmount;
+    transaction.note = note || null;
 
     // Nếu categoryId thay đổi, cập nhật danh mục liên quan
     if (categoryId && categoryId !== transaction.category.toString()) {
