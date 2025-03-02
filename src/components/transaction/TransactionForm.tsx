@@ -26,7 +26,9 @@ interface TransactionFormProps {
 }
 
 const TransactionForm = (props: TransactionFormProps) => {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(
+    props.defaultValues?.actualAmount?.replace(/000$/, "") || ""
+  );
   // Define schema using Zod
   const formSchema = z.object({
     transactionDate: z
@@ -51,7 +53,8 @@ const TransactionForm = (props: TransactionFormProps) => {
         : new Date(),
       transactionType: props.defaultValues?.transactionType,
       category: props.defaultValues?.category || "",
-      actualAmount: props.defaultValues?.actualAmount || "",
+      actualAmount:
+        props.defaultValues?.actualAmount?.replace(/000$/, "") || "",
       // estimatedAmount: props.defaultValues?.estimatedAmount || "",
       note: props.defaultValues?.note,
     },

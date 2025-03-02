@@ -50,9 +50,9 @@ const Transaction = (props: TransactionProps) => {
               </span>
             </div> */}
             {/* <span> </span> */}
-            <div className="w-1/2 md:w-fit flex flex-col md:flex-row items-end md:items-center gap-2">
-              <span>{"Thuc te: "}</span>
+            <div className="w-full md:w-fit flex  md:flex-row justify-between md:items-center gap-2">
               <span className="font-semibold">
+                <span>{"Thuc te: "}</span>
                 {formatNumberToVND(Number(props?.transaction?.actualAmount))}
               </span>
               <span className="font-semibold">
