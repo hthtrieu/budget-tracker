@@ -57,7 +57,7 @@ const Transaction = (props: TransactionProps) => {
               </span>
               <span className="font-semibold">
                 {format(
-                  new Date(props?.transaction?.transactionDate),
+                  new Date(props?.transaction?.transactionDate || ""),
                   "dd/MM/yyyy"
                 )}
               </span>
