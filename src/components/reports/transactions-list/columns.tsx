@@ -1,8 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "@/components/common/table/data-table-column-header";
-import { cn, formatNumberToVND } from "@/lib/utils";
+// import { DataTableColumnHeader } from "@/components/common/table/data-table-column-header";
+import {
+  // cn,
+  formatNumberToVND,
+} from "@/lib/utils";
 import React from "react";
 // Loại dữ liệu mới dựa trên dữ liệu mẫu
 export type TransactionReport = {
@@ -38,31 +41,31 @@ export const columns: ColumnDef<TransactionReport>[] = [
       return <div className="font-medium">{formatNumberToVND(amount)}</div>;
     },
   },
-  {
-    accessorKey: "estimatedAmount",
-    header: "Du kien",
-    cell: ({ row }) => {
-      const amount = row.getValue("estimatedAmount") as number;
-      return <div className="">{formatNumberToVND(amount)}</div>;
-    },
-  },
-  {
-    accessorKey: "chenhLech",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Chênh lệch" />
-    ),
-    accessorFn: (row) => Number(row.actualAmount) - Number(row.estimatedAmount), // Tính giá trị chênh lệch
-    cell: ({ row }) => {
-      const chenhLech = row.getValue("chenhLech") as number;
-      return (
-        <div className={cn("font-bold", chenhLech < 0 ? "text-red-500" : "")}>
-          {formatNumberToVND(chenhLech)}
-        </div>
-      );
-    },
-    enableSorting: true,
-    sortingFn: "basic",
-  },
+  // {
+  //   accessorKey: "estimatedAmount",
+  //   header: "Du kien",
+  //   cell: ({ row }) => {
+  //     const amount = row.getValue("estimatedAmount") as number;
+  //     return <div className="">{formatNumberToVND(amount)}</div>;
+  //   },
+  // },
+  // {
+  //   accessorKey: "chenhLech",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="Chênh lệch" />
+  //   ),
+  //   accessorFn: (row) => Number(row.actualAmount) - Number(row.estimatedAmount), // Tính giá trị chênh lệch
+  //   cell: ({ row }) => {
+  //     const chenhLech = row.getValue("chenhLech") as number;
+  //     return (
+  //       <div className={cn("font-bold", chenhLech < 0 ? "text-red-500" : "")}>
+  //         {formatNumberToVND(chenhLech)}
+  //       </div>
+  //     );
+  //   },
+  //   enableSorting: true,
+  //   sortingFn: "basic",
+  // },
 
   // {
   //   accessorKey: "",

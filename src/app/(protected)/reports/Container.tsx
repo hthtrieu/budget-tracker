@@ -11,7 +11,7 @@ import { columns } from "../transactions/columns";
 import { PieChartSkeleton } from "@/components/chart/pie-chart/PieChartSkeleton";
 const Container = () => {
   const [transactions, setTransactions] = useState<TransactionDocument[]>([]);
-  const [month, setMonth] = useState<number | null>(null);
+  const [month, setMonth] = useState<number | null>(new Date().getMonth() + 1);
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [transactionType, setTransactionType] = useState<"Thu" | "Chi">("Chi");
   const [isLoading, setIsLoading] = useState<boolean>(false);

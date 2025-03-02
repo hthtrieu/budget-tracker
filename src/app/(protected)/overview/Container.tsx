@@ -12,7 +12,8 @@ const HomeContainer = () => {
   const { data: session } = useSession();
   const [categoriesList, setCategoriesList] = useState<CategoryDocument[]>([]);
   const [transactions, setTransactions] = useState<TransactionDocument[]>([]);
-
+  const [month, setMonth] = useState<number | null>(new Date().getMonth() + 1);
+  const [year, setYear] = useState<number>(new Date().getFullYear());
   // overview hook
   const onCreateNewTransaction = async (data: any) => {
     if (!session?.user?.id) {
@@ -78,8 +79,7 @@ const HomeContainer = () => {
   // transaction list hook
   const [groupedTransactions, setGroupedTransactions] = useState<any>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [month, setMonth] = useState<number | null>(null);
-  const [year, setYear] = useState<number>(new Date().getFullYear());
+
   const getUserTransactions = async ({
     month,
     year,
