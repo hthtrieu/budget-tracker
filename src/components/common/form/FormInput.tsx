@@ -187,6 +187,7 @@ const renderInput = ({
           classNameIcon={classNameIcon}
           autoFocus={autoFocus}
           ref={ref}
+          value={value}
         />
       );
     case Constants.INPUT_TYPE.CHECKBOX:

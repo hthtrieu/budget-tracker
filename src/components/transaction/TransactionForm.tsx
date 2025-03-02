@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { FormInput } from "@/components/common/form/FormInput";
 import { Constants } from "@/lib/constants";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Card } from "../ui/card";
 import { HandCoins } from "lucide-react";
+import { formatNumberToVND } from "@/lib/utils";
 
 interface TransactionFormProps {
   defaultValues?: {
@@ -25,6 +26,7 @@ interface TransactionFormProps {
 }
 
 const TransactionForm = (props: TransactionFormProps) => {
+  const [amount, setAmount] = useState("");
   // Define schema using Zod
   const formSchema = z.object({
     transactionDate: z
@@ -57,7 +59,10 @@ const TransactionForm = (props: TransactionFormProps) => {
 
   // Submit handler
   const submitForm: SubmitHandler<FormData> = (values) => {
-    props.onSubmitTransactionForm?.(values);
+    props.onSubmitTransactionForm?.({
+      ...values,
+      actualAmount: `${values.actualAmount}000`,
+    });
   };
 
   return (
@@ -80,12 +85,19 @@ const TransactionForm = (props: TransactionFormProps) => {
             control={form.control}
             fieldName="actualAmount"
             type={Constants.INPUT_TYPE.TEXT}
-            label="Thực tế"
+            label="Thực tế (.000 vnd)"
             placeholder="Số tiền thực tế"
             icon={<HandCoins />}
             alignIcon="right"
             required={true}
+            value={amount}
+            onChange={(valStr) => {
+              setAmount(valStr);
+            }}
           />
+          <span className="text-sm text-green-500 font-semibold">
+            {formatNumberToVND(Number(`${amount}000`))}
+          </span>
           {/* <FormInput
             control={form.control}
             fieldName="estimatedAmount"
