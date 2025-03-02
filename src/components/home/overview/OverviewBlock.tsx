@@ -30,6 +30,7 @@ const OverviewBlock = ({
   const [currentTransactionType, setCurrentTransactionType] = useState<
     "Thu" | "Chi"
   >("Thu");
+
   function transformTransactions(transactions: TransactionDocument[]) {
     const groupedData: Record<
       string,
@@ -68,15 +69,16 @@ const OverviewBlock = ({
   let title: string = "";
 
   const saveMoney =
-    Number(IncomeData?.actualAmount) - Number(ExpenseData?.actualAmount);
+    Number(IncomeData?.actualAmount || 0) -
+    Number(ExpenseData?.actualAmount || 0);
   if (saveMoney > 0) {
-    title = `Tháng này bạn đã tiết kiệm được ${formatNumberToVND(saveMoney)}`;
+    title = `Bạn đã tiết kiệm được ${formatNumberToVND(saveMoney)}`;
   }
   if (saveMoney < 0) {
-    title = `Tháng này bạn bị âm ${formatNumberToVND(saveMoney)}`;
+    title = `Bạn bị âm ${formatNumberToVND(saveMoney)}`;
   }
   if (saveMoney == 0) {
-    title = `Tháng này bạn khum tiết kiệm được đồng nào`;
+    title = `Bạn khum tiết kiệm được đồng nào`;
   }
 
   return (

@@ -45,8 +45,8 @@ const CategoryForm = ({
             control={form.control}
             fieldName="name"
             type={Constants.INPUT_TYPE.TEXT}
-            label="Ten"
-            placeholder="Nhap ten muc"
+            label="Tên mục"
+            placeholder="Nhập Tên mục"
             required={true}
           />
           <Button type="submit" variant="default" className="w-full">

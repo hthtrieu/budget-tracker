@@ -5,7 +5,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { DataTableColumnHeader } from "@/components/common/table/data-table-column-header";
+// import { DataTableColumnHeader } from "@/components/common/table/data-table-column-header";
 import { cn, formatNumberToVND } from "@/lib/utils";
 import { format } from "date-fns";
 import { TransactionDocument } from "@/models/Transaction";
@@ -36,30 +36,30 @@ export const columns: ColumnDef<TransactionDocument>[] = [
       return <div>{formatNumberToVND(Number(amount))}</div>;
     },
   },
-  {
-    accessorKey: "estimatedAmount",
-    header: "Dự kiến",
-    cell: ({ row }) => {
-      const amount = row.getValue("estimatedAmount") as number;
-      return <div>{formatNumberToVND(Number(amount))}</div>;
-    },
-  },
-  {
-    accessorKey: "chenhLech",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Chênh lệch" />
-    ),
-    accessorFn: (row) => Number(row.actualAmount) - Number(row.estimatedAmount),
-    cell: ({ row }) => {
-      const chenhLech = row.getValue("chenhLech") as number;
-      return (
-        <div className={cn("font-bold", chenhLech < 0 ? "text-red-500" : "")}>
-          {formatNumberToVND(chenhLech)}
-        </div>
-      );
-    },
-    enableSorting: true,
-  },
+  // {
+  //   accessorKey: "estimatedAmount",
+  //   header: "Dự kiến",
+  //   cell: ({ row }) => {
+  //     const amount = row.getValue("estimatedAmount") as number;
+  //     return <div>{formatNumberToVND(Number(amount))}</div>;
+  //   },
+  // },
+  // {
+  //   accessorKey: "chenhLech",
+  //   header: ({ column }) => (
+  //     <DataTableColumnHeader column={column} title="Chênh lệch" />
+  //   ),
+  //   accessorFn: (row) => Number(row.actualAmount) - Number(row.estimatedAmount),
+  //   cell: ({ row }) => {
+  //     const chenhLech = row.getValue("chenhLech") as number;
+  //     return (
+  //       <div className={cn("font-bold", chenhLech < 0 ? "text-red-500" : "")}>
+  //         {formatNumberToVND(chenhLech)}
+  //       </div>
+  //     );
+  //   },
+  //   enableSorting: true,
+  // },
   {
     accessorKey: "transactionType",
     header: "Loại",

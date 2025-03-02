@@ -9,7 +9,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Card } from "../ui/card";
-import { CircleDollarSignIcon, HandCoins } from "lucide-react";
+import { HandCoins } from "lucide-react";
 
 interface TransactionFormProps {
   defaultValues?: {
@@ -33,7 +33,7 @@ const TransactionForm = (props: TransactionFormProps) => {
     transactionType: z.enum(["Thu", "Chi"]).optional(),
     category: z.string({ required_error: "Không được bỏ trống" }),
     actualAmount: z.string({ required_error: "Không được bỏ trống" }),
-    estimatedAmount: z.string({ required_error: "Không được bỏ trống" }),
+    // estimatedAmount: z.string({ required_error: "Không được bỏ trống" }),
     note: z.string().optional(),
   });
 
@@ -50,7 +50,7 @@ const TransactionForm = (props: TransactionFormProps) => {
       transactionType: props.defaultValues?.transactionType,
       category: props.defaultValues?.category || "",
       actualAmount: props.defaultValues?.actualAmount || "",
-      estimatedAmount: props.defaultValues?.estimatedAmount || "",
+      // estimatedAmount: props.defaultValues?.estimatedAmount || "",
       note: props.defaultValues?.note,
     },
   });
@@ -86,7 +86,7 @@ const TransactionForm = (props: TransactionFormProps) => {
             alignIcon="right"
             required={true}
           />
-          <FormInput
+          {/* <FormInput
             control={form.control}
             fieldName="estimatedAmount"
             type={Constants.INPUT_TYPE.TEXT}
@@ -95,7 +95,7 @@ const TransactionForm = (props: TransactionFormProps) => {
             icon={<CircleDollarSignIcon />}
             alignIcon="right"
             required={true}
-          />
+          /> */}
           <FormInput
             control={form.control}
             fieldName="transactionType"

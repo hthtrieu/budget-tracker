@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { startOfDay, subDays, isSameDay, isThisWeek } from "date-fns";
 import { TransactionDocument } from "@/models/Transaction";
 import { CategoryDocument } from "@/models/Category";
+import { MonthYearSelect } from "@/components/reports/MonthYearSelect";
 
 const HomeContainer = () => {
   const { data: session } = useSession();
@@ -38,7 +39,7 @@ const HomeContainer = () => {
 
       if (response.ok) {
         await response.json();
-        getUserTransactions();
+        getUserTransactions({ month, year });
       } else {
         const error = await response.json();
         alert(error);
@@ -77,21 +78,30 @@ const HomeContainer = () => {
   // transaction list hook
   const [groupedTransactions, setGroupedTransactions] = useState<any>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const getUserTransactions = async () => {
+  const [month, setMonth] = useState<number | null>(null);
+  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const getUserTransactions = async ({
+    month,
+    year,
+  }: {
+    month: number | null;
+    year: number;
+  }) => {
     setIsLoading(true);
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
+    // const date = new Date();
+    // const year = date.getFullYear();
+    // const month = date.getMonth() + 1;
     try {
-      const response = await fetch(
-        `/api/user/transaction?year=${year}&month=${month}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let url = `/api/user/transaction?year=${year}`;
+      if (month !== null && month > 0) {
+        url += `&month=${month}`;
+      }
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
         const result = await response.json();
@@ -107,6 +117,13 @@ const HomeContainer = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+  const onMonthYearSelect = (
+    selectedMonth: number | null,
+    selectedYear: number
+  ) => {
+    setMonth(selectedMonth);
+    setYear(selectedYear);
   };
 
   // Phân loại giao dịch
@@ -146,13 +163,21 @@ const HomeContainer = () => {
 
   useEffect(() => {
     if (session?.user?.id) {
-      getUserTransactions();
+      getUserTransactions({ month, year });
       getUserCategoriesList();
     }
     //eslint-disable-next-line
-  }, [session]);
+  }, [session, month, year]);
+  // useEffect(() => {
+  //   getUserTransactions({ month, year });
+  // }, [month, year]);
   return (
     <div className="flex flex-col gap-4">
+      <MonthYearSelect
+        onSelect={(selectedMonth: number | null, selectedYear: number) =>
+          onMonthYearSelect(selectedMonth, selectedYear)
+        }
+      />
       <OverviewBlock
         categoriesList={categoriesList}
         onCreateTransaction={onCreateNewTransaction}

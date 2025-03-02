@@ -39,7 +39,7 @@ const TransactionSchema = new Schema<TransactionDocument>(
     },
     estimatedAmount: {
       type: String,
-      required: [true, "Số tiền dự kiến là bắt buộc"],
+      required: [false, "Số tiền dự kiến là bắt buộc"],
     },
     transactionType: {
       type: String,
